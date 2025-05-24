@@ -16,7 +16,7 @@ type Options<T> = {
  * @returns {Promise<[T | undefined, Error | null]>} - 성공 시 결과, 실패 시 error 반환
  */
 
-export async function wrapApiResponse<T>(
+export async function wrapServiceResponse<T>(
   fn: () => Promise<T>,
   options: Options<T> = {},
 ): Promise<[T | undefined, Error | null]> {

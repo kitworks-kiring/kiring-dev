@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
 
-export const getTeamLength = () => {
+export const countTeams = () => {
   return prisma.team.count()
 }
