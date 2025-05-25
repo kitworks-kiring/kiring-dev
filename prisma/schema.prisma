@@ -16,7 +16,7 @@ model calendar {
   date        DateTime  @db.Date
   type        String    @default("") @db.VarChar
   created_at  DateTime  @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
-  updated_at  DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  updated_at  DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt @db.Timestamptz(6)
   team        team?     @relation(fields: [team_code], references: [team_code], onDelete: NoAction, onUpdate: NoAction, map: "CALENDAR_team_code_fkey")
 }
 
@@ -38,7 +38,7 @@ model plane {
   message                      String    @default("")
   is_printable                 Boolean   @default(true)
   sent_at                      DateTime  @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
-  updated_at                   DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  updated_at                   DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt @db.Timestamptz(6)
   user_plane_receiver_idTouser user      @relation("plane_receiver_idTouser", fields: [receiver_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "PLANE_reveiver_id_fkey")
   user_plane_sender_idTouser   user      @relation("plane_sender_idTouser", fields: [sender_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "PLANE_sender_id_fkey")
 }
@@ -57,7 +57,7 @@ model restaurant {
   address       String?   @default("") @db.VarChar
   phone         String?   @default("") @db.VarChar
   created_at    DateTime  @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
-  updated_at    DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  updated_at    DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt @db.Timestamptz(6)
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
@@ -86,7 +86,7 @@ model user {
   is_employed                   Boolean   @default(false)
   is_admin                      Boolean   @default(false)
   created_at                    DateTime  @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
-  updated_at                    DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
+  updated_at                    DateTime? @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @updatedAt @db.Timestamptz(6)
   like                          like[]
   plane_plane_receiver_idTouser plane[]   @relation("plane_receiver_idTouser")
   plane_plane_sender_idTouser   plane[]   @relation("plane_sender_idTouser")
